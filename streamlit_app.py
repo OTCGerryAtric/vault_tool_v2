@@ -17,30 +17,23 @@ access_token = st.text_input('Please enter your access token')
 st.write(access_token)
 
 
-# import requests
-#
-# # Your application's details
-# api_key = 'd9194342565e4bf0b8238751543ecb0b'
-# client_id = '44582'
-# authorization_code = 'cec69b531bbd3db31f7f55a4ca4fd258'  # replace with your actual authorization code
-#
-# # Endpoint for getting the access token
-# token_url = 'https://www.bungie.net/platform/app/oauth/token/'
-#
-# # The data to send with the request
-# data = {
-#     'grant_type': 'authorization_code',
-#     'client_id': client_id,
-#     'code': authorization_code,
-# }
-#
-# # The headers for the request
-# headers = {
-#     'X-API-Key': api_key,
-# }
-#
-# # Send the request
-# response = requests.post(token_url, headers=headers, data=data)
+# Endpoint for getting the access token
+token_url = 'https://www.bungie.net/platform/app/oauth/token/'
+
+# The data to send with the request
+data = {
+    'grant_type': 'authorization_code',
+    'client_id': client_id,
+    'code': authorization_code,
+}
+
+# The headers for the request
+headers = {
+    'X-API-Key': api_key,
+}
+
+# Send the request
+response = requests.post(token_url, headers=headers, data=data)
 #
 # # Print the status code and the body of the response
 # print(f"Status code: {response.status_code}")
