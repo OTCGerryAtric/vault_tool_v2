@@ -24,6 +24,9 @@ token_url = 'https://www.bungie.net/platform/app/oauth/token/'
 # The data to send with the request
 data = {'grant_type': 'authorization_code', 'client_id': client_id, 'code': access_token,}
 
+# Headers for the request
+headers = {'X-API-Key': api_key,'Authorization': f"Bearer {access_token}"}
+
 # Send the request
 response = requests.post(token_url, headers=headers, data=data)
 response_data = response.json()
