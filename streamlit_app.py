@@ -28,7 +28,7 @@ headers = {'X-API-Key': api_key}
 # Send the request
 response = requests.post(token_url, headers=headers, data=data)
 
-# If the request was successful, print out the returned data
+# Get the Bungie Membership ID
 if response.status_code == 200:
     response_data = response.json()
     access_token = response_data['access_token']
@@ -36,8 +36,3 @@ if response.status_code == 200:
 else:
     st.write('Error:', response.status_code)
     st.write('Response:', response.text)
-
-headers = {"Authorization": f"Bearer {access_token}", 'X-API-Key': api_key}
-response = requests.get(f'https://www.bungie.net/Platform/User/GetBungieNetUserById/{membership_id}/', headers=headers)
-
-st.write(response_data)
