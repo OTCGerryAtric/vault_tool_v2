@@ -17,7 +17,6 @@ headers = {'X-API-Key': api_key}
 data = {
     'grant_type': 'authorization_code',
     'client_id': client_id,
-    'code': code,
 }
 
 response = requests.post(token_url, headers=headers, data=data)
