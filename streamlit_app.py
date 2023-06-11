@@ -44,9 +44,6 @@ response = requests.get('https://www.bungie.net/Platform/User/GetMembershipsForC
 if response.status_code == 200:
     memberships_data = response.json()
     destiny_memberships = memberships_data['Response']['destinyMemberships']
-    for membership in destiny_memberships:
-        st.write(f"Membership Type: {membership['membershipType']}")
-        st.write(f"Membership ID: {membership['membershipId']}")
 else:
     st.write(f'Error: {response.status_code}')
 
