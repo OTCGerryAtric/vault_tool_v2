@@ -6,6 +6,7 @@ import streamlit as st
 api_key = 'd9194342565e4bf0b8238751543ecb0b'
 client_id = '44582'
 authorization_url = 'https://www.bungie.net/en/OAuth/Authorize'
+base_url = 'https://www.bungie.net/Platform/'
 
 # Authorise Bungie Account
 url = f"{authorization_url}?client_id={client_id}&response_type=code"
@@ -14,10 +15,9 @@ webbrowser.open(url)
 
 # Ask the user to enter the authorization code
 authorization_code = st.text_input('Please enter the authorization code')
-st.write(authorization_code)
 
 # Endpoint for getting the access token
-token_url = 'https://www.bungie.net/platform/app/oauth/token/'
+token_url = base_url + 'app/oauth/token/'
 
 # The data to send with the request
 data = {'grant_type': 'authorization_code', 'client_id': client_id, 'code': authorization_code}
@@ -52,4 +52,12 @@ unique_membership_types = list(set(membership_types))  # get unique values by co
 
 selected_membership_type = st.selectbox('Select Membership Type', unique_membership_types)
 
+headers = {"Authorization": f"Bearer {access_token}", 'X-API-Key': api_key}
 
+response = requests.get('https://www.bungie.net/User.GetSanitizedPlatformDisplayNames', headers=headers)
+
+if response.status_code == 200:
+    memberships_data = response.json()
+    destiny_memberships = memberships_data['Response']['destinyMemberships']
+else:
+    st.write(f'Error: {response.status_code}')
