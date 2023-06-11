@@ -12,9 +12,5 @@ url = f"{authorization_url}?client_id={client_id}&response_type=code"
 st.markdown(f'[Authorize your Bungie Account]({url})')
 webbrowser.open(url)
 
-response = requests.get('https://www.bungie.net/Platform/Destiny2/PLATFORM/Profile/DESTINY_MEMBERSHIP_ID/',
-                            headers=headers)
-if response.status_code == 200:
-    st.write(response.json())
-else:
-    st.write(f"Request failed with status code {response.status_code}")
+# Ask the user to enter the access token
+access_token = st.text_input('Please enter your access token')
