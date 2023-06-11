@@ -37,4 +37,15 @@ else:
     st.write('Error:', response.status_code)
     st.write('Response:', response.text)
 
-st.write(response_data)
+headers = {"Authorization": f"Bearer {access_token}", 'X-API-Key': api_key}
+
+response = requests.get('https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/', headers=headers)
+
+if response.status_code == 200:
+    memberships_data = response.json()
+    destiny_memberships = memberships_data['Response']['destinyMemberships']
+    for membership in destiny_memberships:
+        st.write(f"Membership Type: {membership['membershipType']}")
+        st.write(f"Membership ID: {membership['membershipId']}")
+else:
+    st.write(f'Error: {response.status_code}')
