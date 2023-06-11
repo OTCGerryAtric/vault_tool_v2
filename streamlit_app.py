@@ -35,4 +35,5 @@ headers = {
 # Send the request
 response = requests.post(token_url, headers=headers, data=data)
 
-st.write(response)
+st.write(f"Status code: {response.status_code}")
+st.write(f"Response body: {response.json()}")
