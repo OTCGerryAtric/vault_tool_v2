@@ -37,9 +37,9 @@ response = requests.get('https://www.bungie.net/Platform/User/GetMembershipsForC
 if response.status_code == 200:
     response_data = response.json()
     destiny_membership_id = response_data['Response']['destinyMemberships'][0]['membershipId']
-    print(f"Destiny Membership ID: {destiny_membership_id}")
+    st.write(f"Destiny Membership ID: {destiny_membership_id}")
 else:
-    print(f"Could not get Destiny Membership ID, response status code: {response.status_code}")
+    st.write(f"Could not get Destiny Membership ID, response status code: {response.status_code}")
 
 # # Send the request
 # response = requests.post(token_url, headers=headers, data=data)
