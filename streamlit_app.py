@@ -34,5 +34,6 @@ headers = {
 
 # Send the request
 response = requests.post(token_url, headers=headers, data=data)
-membership_id = response['membership_id']
+response_data = response.json()
+membership_id = response_data['membership_id']
 print(membership_id)  # This will print '9354468'
