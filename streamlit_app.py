@@ -26,6 +26,7 @@ data = {'grant_type': 'authorization_code', 'client_id': client_id, 'code': acce
 
 # Send the request
 response = requests.post(token_url, headers=headers, data=data)
+response_data = response.json()
 membership_id = response_data['membership_id']
 st.write(membership_id)
 
