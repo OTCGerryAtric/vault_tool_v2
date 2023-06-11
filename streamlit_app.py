@@ -24,7 +24,7 @@ token_url = 'https://www.bungie.net/platform/app/oauth/token/'
 data = {
     'grant_type': 'authorization_code',
     'client_id': client_id,
-    'code': authorization_code,
+    'code': access_token,
 }
 
 # The headers for the request
