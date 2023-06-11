@@ -5,8 +5,16 @@ import streamlit as st
 # Setting up Variables
 api_key = 'd9194342565e4bf0b8238751543ecb0b'
 client_id = '44582'
-authorization_url = 'https://www.bungie.net/en/OAuth/Authorize'
+
+# Setting up URL's
 base_url = 'https://www.bungie.net/Platform/'
+authorization_url = 'https://www.bungie.net/en/OAuth/Authorize'
+get_membership_fpr_current_user_url = 'User/GetMembershipsForCurrentUser/'
+get_profiles_url = 'Destiny2/{membershipType}/Profile/{destinyMembershipId}/'
+get_linked_profiles_url = 'Destiny2/{membershipType}/Profile/{membershipId}/LinkedProfiles/'
+get_character_url = 'Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/'
+get_item_url = 'Destiny2/{membershipType}/Profile/{destinyMembershipId}/Item/{itemInstanceId}/'
+get_membership_url = 'User/GetMembershipsById/{destinyMembershipId}/1/'
 
 # Authorise Bungie Account
 url = f"{authorization_url}?client_id={client_id}&response_type=code"
@@ -16,48 +24,3 @@ webbrowser.open(url)
 # Ask the user to enter the authorization code
 authorization_code = st.text_input('Please enter the authorization code')
 
-# Endpoint for getting the access token
-token_url = base_url + 'app/oauth/token/'
-
-# The data to send with the request
-data = {'grant_type': 'authorization_code', 'client_id': client_id, 'code': authorization_code}
-
-# Headers for the request
-headers = {'X-API-Key': api_key}
-
-# Send the request
-response = requests.post(token_url, headers=headers, data=data)
-
-# Get the Bungie Membership ID
-if response.status_code == 200:
-    response_data = response.json()
-    access_token = response_data['access_token']
-    membership_id = response_data['membership_id']
-else:
-    st.write('Error:', response.status_code)
-    st.write('Response:', response.text)
-
-headers = {"Authorization": f"Bearer {access_token}", 'X-API-Key': api_key}
-
-response = requests.get('https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/', headers=headers)
-
-if response.status_code == 200:
-    memberships_data = response.json()
-    destiny_memberships = memberships_data['Response']['destinyMemberships']
-else:
-    st.write(f'Error: {response.status_code}')
-
-membership_types = [membership['membershipType'] for membership in destiny_memberships]
-unique_membership_types = list(set(membership_types))  # get unique values by converting to a set and then back to a list
-
-selected_membership_type = st.selectbox('Select Membership Type', unique_membership_types)
-
-headers = {"Authorization": f"Bearer {access_token}", 'X-API-Key': api_key}
-
-response = requests.get('https://www.bungie.net/User.GetSanitizedPlatformDisplayNames', headers=headers)
-
-if response.status_code == 200:
-    memberships_data = response.json()
-    destiny_memberships = memberships_data['Response']['destinyMemberships']
-else:
-    st.write(f'Error: {response.status_code}')
