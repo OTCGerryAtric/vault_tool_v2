@@ -24,3 +24,23 @@ webbrowser.open(url)
 # Ask the user to enter the authorization code
 authorization_code = st.text_input('Please enter the authorization code')
 
+# Endpoint for getting the access token
+token_url = base_url + 'app/oauth/token/'
+
+# The data to send with the request
+data = {'grant_type': 'authorization_code', 'client_id': client_id, 'code': authorization_code}
+
+# Headers for the request
+headers = {'X-API-Key': api_key}
+
+# Send the request
+response = requests.post(token_url, headers=headers, data=data)
+
+# Get the Bungie Membership ID
+if response.status_code == 200:
+    response_data = response.json()
+    access_token = response_data['access_token']
+    membership_id = response_data['membership_id']
+else:
+    st.write('Error:', response.status_code)
+    st.write('Response:', response.text)
