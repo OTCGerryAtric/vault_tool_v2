@@ -49,3 +49,10 @@ if response.status_code == 200:
         st.write(f"Membership ID: {membership['membershipId']}")
 else:
     st.write(f'Error: {response.status_code}')
+
+membership_types = [membership['membershipType'] for membership in destiny_memberships]
+unique_membership_types = list(set(membership_types))  # get unique values by converting to a set and then back to a list
+
+selected_membership_type = st.selectbox('Select Membership Type', unique_membership_types)
+
+
