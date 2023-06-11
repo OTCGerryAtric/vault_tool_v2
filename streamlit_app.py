@@ -14,7 +14,7 @@ webbrowser.open(url)
 
 # Ask the user to enter the access token
 access_token = st.text_input('Please enter your access token')
-print(access_token)
+st.write(access_token)
 
 
 # import requests
