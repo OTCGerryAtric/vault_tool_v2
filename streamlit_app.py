@@ -34,6 +34,19 @@ headers = {
 
 # Send the request
 response = requests.post(token_url, headers=headers, data=data)
-response_data = response.json()
-membership_id = response_data['membership_id']
-print(membership_id)  # This will print '9354468'
+
+# Check if the request was successful
+if response.status_code == 200:
+    response_data = response.json()
+
+    # Print the response_data to debug
+    st.write(response_data)
+
+    # Check if 'membership_id' is in response_data before trying to access it
+    if 'membership_id' in response_data:
+        membership_id = response_data['membership_id']
+        st.write(membership_id)  # This will print '9354468' if 'membership_id' exists in response_data
+    else:
+        st.write("membership_id not found in response data")
+else:
+    st.write(f"Could not get access token, response status code: {response.status_code}")
