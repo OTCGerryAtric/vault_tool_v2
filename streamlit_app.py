@@ -34,15 +34,5 @@ headers = {
 
 # Send the request
 response = requests.post(token_url, headers=headers, data=data)
-#
-# # Print the status code and the body of the response
-# print(f"Status code: {response.status_code}")
-# print(f"Response body: {response.text}")
-#
-# # If the request was successful, the response will contain the access token
-# if response.status_code == 200:
-#     response_data = response.json()
-#     access_token = response_data['access_token']
-#     print(f"Access token: {access_token}")
-# else:
-#     print("Could not get access token")
+
+st.write(response)
