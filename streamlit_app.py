@@ -41,6 +41,7 @@ if response.status_code == 200:
     response_data = response.json()
     access_token = response_data['access_token']
     membership_id = response_data['membership_id']
+    st.write(membership_id)
 else:
     st.write('Error:', response.status_code)
     st.write('Response:', response.text)
