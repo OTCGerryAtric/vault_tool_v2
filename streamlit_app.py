@@ -40,4 +40,4 @@ else:
 headers = {"Authorization": f"Bearer {access_token}", 'X-API-Key': api_key}
 response = requests.get(f'https://www.bungie.net/Platform/User/GetBungieNetUserById/{membership_id}/', headers=headers)
 
-st.write(response)
+st.write(response_data)
