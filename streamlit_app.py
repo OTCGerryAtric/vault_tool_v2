@@ -1,8 +1,6 @@
 import requests
 import webbrowser
 import streamlit as st
-import requests
-import webbrowser
 
 # Setting up Variables
 api_key = 'd9194342565e4bf0b8238751543ecb0b'
@@ -29,36 +27,39 @@ headers = {'X-API-Key': api_key,'Authorization': f"Bearer {access_token}"}
 
 # Send the request
 response = requests.post(token_url, headers=headers, data=data)
-response_data = response.json()
-membership_id = response_data['membership_id']
-st.write(membership_id)
+st.write(response)
 
-# # The headers for the request
-# headers = {'X-API-Key': api_key,}
 #
-# response = requests.get('https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/', headers=headers)
+# response_data = response.json()
+# membership_id = response_data['membership_id']
+# st.write(membership_id)
 #
-# if response.status_code == 200:
-#     response_data = response.json()
-#     destiny_membership_id = response_data['Response']['destinyMemberships'][0]['membershipId']
-#     st.write(f"Destiny Membership ID: {destiny_membership_id}")
-# else:
-#     st.write(f"Could not get Destiny Membership ID, response status code: {response.status_code}")
-#
-#
-#
-# # Check if the request was successful
-# if response.status_code == 200:
-#     response_data = response.json()
-#
-#     # Print the response_data to debug
-#     st.write(response_data)
-#
-#     # Check if 'membership_id' is in response_data before trying to access it
-#     if 'membership_id' in response_data:
-#         membership_id = response_data['membership_id']
-#         st.write(membership_id)
-#     else:
-#         st.write("membership_id not found in response data")
-# else:
-#     st.write(f"Could not get access token, response status code: {response.status_code}")
+# # # The headers for the request
+# # headers = {'X-API-Key': api_key,}
+# #
+# # response = requests.get('https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/', headers=headers)
+# #
+# # if response.status_code == 200:
+# #     response_data = response.json()
+# #     destiny_membership_id = response_data['Response']['destinyMemberships'][0]['membershipId']
+# #     st.write(f"Destiny Membership ID: {destiny_membership_id}")
+# # else:
+# #     st.write(f"Could not get Destiny Membership ID, response status code: {response.status_code}")
+# #
+# #
+# #
+# # # Check if the request was successful
+# # if response.status_code == 200:
+# #     response_data = response.json()
+# #
+# #     # Print the response_data to debug
+# #     st.write(response_data)
+# #
+# #     # Check if 'membership_id' is in response_data before trying to access it
+# #     if 'membership_id' in response_data:
+# #         membership_id = response_data['membership_id']
+# #         st.write(membership_id)
+# #     else:
+# #         st.write("membership_id not found in response data")
+# # else:
+# #     st.write(f"Could not get access token, response status code: {response.status_code}")
