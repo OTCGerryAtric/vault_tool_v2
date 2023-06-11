@@ -33,8 +33,10 @@ if response.status_code == 200:
     response_data = response.json()
     access_token = response_data['access_token']
     membership_id = response_data['membership_id']
-    st.write('Access Token:', access_token)
-    st.write('Membership ID:', membership_id)
 else:
     st.write('Error:', response.status_code)
     st.write('Response:', response.text)
+
+response = requests.get('https://www.bungie.net/Platform/User/GetMembershipsForCurrentUser/' + membership_id + '/', headers=headers)
+
+st.write(response)
